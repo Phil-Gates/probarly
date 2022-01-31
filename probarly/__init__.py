@@ -1,4 +1,4 @@
-from probarly.probarly import (
+from .probarly import (
     Task,
     Animation,
     BarAnimations,
