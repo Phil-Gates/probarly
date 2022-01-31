@@ -6,7 +6,7 @@ if sys.version_info < (3, 7):
 
 setup(
     name="probarly",
-    version="0.0.11",
+    version="1.0.0",
     description="Create beautiful, heavily customizable progress bars... probarly",
     url="http://github.com/phil-gates/probarly",
     author="Phil",
