@@ -33,9 +33,9 @@ more time went into the name than the project (it's probarly not good...)
   you can define a new task with `probarly.Task()` you give it text to display and an id, which is an int used for more efficient task managing, typehint with TaskType an example is below.
   ```python
 >>> import probarly
->>> bar = probarly.Progbar(100, {0: probarly.OtherAnimations.morph, "*": probarly.OtherAnimations.up_down})
->>> bar.adv(to=50, task=Task("Part one... ", 0))  # displays the `morph` animation
->>> bar.adv(to=50, task=Task("Part two... ", 99)) # displays the `up_down` animation
+>>> bar = probarly.Progbar(length=100, animations={0: probarly.OtherAnimations.morph, "*": probarly.OtherAnimations.up_down})
+>>> bar.adv(to=50, task=probarly.Task("Part one... ", 0))  # displays the `morph` animation
+>>> bar.adv(to=50, task=probarly.Task("Part two... ", 99)) # displays the `up_down` animation
   ```
 
   ## animations

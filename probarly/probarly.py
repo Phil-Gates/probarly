@@ -95,6 +95,7 @@ class Progbar:
 
     def show(self) -> None:
         """Show the current state if the bar."""
+        print(self.filler)
         print(
             f"\x1b[1K\r{self.task.text}{self.start}{''.join(self.bar)}{self.filler * (self.length - self.__full - 1)}{self.end} {int(round((self.__full/self.length) * 100))}% {self.__animation.frames[self.__animation_frame]}",
             end="",
