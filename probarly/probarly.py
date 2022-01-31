@@ -21,10 +21,7 @@ class Task:
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, self.__class__):
             return False
-        if self.id_ == other.id_:
-            return True
-        else:
-            return False
+        return self.id_ == other.id_:
 
     def __ne__(self, other: Any) -> bool:
         return not self.__eq(other)
@@ -94,7 +91,7 @@ class Progbar:
         self.task = Task("", -1)
 
     def show(self) -> None:
-        """Show the current state if the bar."""
+        """Show the current state of the bar."""
         print(self.filler)
         print(
             f"\x1b[1K\r{self.task.text}{self.start}{''.join(self.bar)}{self.filler * (self.length - self.__full - 1)}{self.end} {int(round((self.__full/self.length) * 100))}% {self.__animation.frames[self.__animation_frame]}",
