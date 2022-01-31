@@ -30,10 +30,16 @@ more time went into the name than the project (it's probarly not good...)
    - show_: show the current state of bar after resetting (default False)
 
   ## tasks
-  you can define a new task with `probarly.Task()` you give it text to display and an id, which is an int used for more efficient task managing, typehint with TaskType
+  you can define a new task with `probarly.Task()` you give it text to display and an id, which is an int used for more efficient task managing, typehint with TaskType an example is below.
+  ```python
+>>> import probarly
+>>> bar = probarly.Progbar(100, {0: probarly.OtherAnimations.morph, "*": probarly.OtherAnimations.up_down})
+>>> bar.adv(to=50, task=Task("Part one... ", 0))  # displays the `morph` animation
+>>> bar.adv(to=50, task=Task("Part two... ", 99)) # displays the `up_down` animation
+  ```
 
   ## animations
-  there are two types: the one that is in the bar, and the one that is after it. the one that is in the bar is just a list of chars, so they don't really need an explaination. an "after-bar" animation is defined with `Animation()`, you give that the frames (list of chars), and slowness (int). typehint with AnimationType
+  there are two types: the one that is in the bar, and the one that is after it. the one that is in the bar is just a list of chars, so they don't really need an explanation. an "after-bar" animation is defined with `Animation()`, you give that the frames (list of chars), and slowness (int). typehint with AnimationType
 
 # disclaimers
   - it's bleeding edge, so 60% of the time i just pushed it not even testing =)

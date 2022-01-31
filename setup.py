@@ -1,4 +1,8 @@
 from setuptools import setup
+import sys
+
+if sys.version_info < (3, 7):
+    raise RuntimeError("Python >= 3.7")
 
 setup(
     name="probarly",
@@ -10,4 +14,5 @@ setup(
     license="MIT",
     packages=["probarly"],
     zip_safe=False,
+    classifiers=["Programming Language :: Python :: 3.7"],
 )
