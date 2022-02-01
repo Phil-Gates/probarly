@@ -20,6 +20,7 @@ more time went into the name than the project (it's probarly not good...)
   - to: a percentage; the bar will go forward that amount
   - time_: the time between switching frames of the progress bar (default 0.005)
   - [task](#tasks): specify a [task](#tasks) to show what you are currently doing (default `Task("", -1)`)
+  - show_newline: show a newline after bar reaches 100% (not on official pip release yet) (default `True`)
   <br />
   make the bar stop, with animations still going (use `time.sleep` if you do not want animations) `bar.wait()`, args defined below
   <br />
