@@ -21,7 +21,7 @@ class Task:
     def __eq__(self, other: Any) -> bool:
         if not isinstance(other, self.__class__):
             return False
-        return self.id_ == other.id_:
+        return self.id_ == other.id_
 
     def __ne__(self, other: Any) -> bool:
         return not self.__eq(other)
