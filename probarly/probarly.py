@@ -100,16 +100,18 @@ class Progbar:
     def adv(
         self,
         to: int,
-        time_: float = 0.01,
+        time_: float = 0.005,
         task: TaskType = Task("", -1),
         show_newline=True,
+        show=True,
     ) -> None:
         """
         How to use:
           - to: a percentage; the bar will go forward that amount
           - time_: the time between switching frames of the progress bar (default 0.005)
           - task: specify a task to show what you are currently doing (default '')
-          - show_newline: show newline after bar reaches 100%
+          - show_newline: show newline after bar reaches 100% (default True)
+          - show: actually show the bar (default True)
         """
         self.task = task
         for _ in range(int(round((to / 100) * self.length)) * len(self.frames)):
