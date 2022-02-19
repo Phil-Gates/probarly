@@ -1,5 +1,5 @@
 # probarly
-more time went into the name than the project (it's probarly not good...)
+more time went into the name than the project (it's probarly not good...) [WARNING: DO NOT REPEAT FRAMES IN BAR ANIMATIONS]
 
 # how 2
   ## the bar itself
