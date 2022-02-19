@@ -2,9 +2,13 @@
 more time went into the name than the project (it's probarly not good...)
 
 # how 2
+
   ## the bar itself
+
   create a progress bar with `bar = probarly.Progbar()`, args defined below
+
   <br />
+
   - length: specifies length of the progress bar (default 10)
   - filler: what to fill the rest of the progress bar with (default ' ')
   - start: what the start of the progress bar should look like (default '|')
@@ -18,8 +22,11 @@ more time went into the name than the project (it's probarly not good...)
       - you can use any task [id](#tasks) to specify the colour to use when that task is active
       - an [id](#tasks) of -1 is reserved for [tasks](#tasks) with no text
       - you can use a '*' to denote all [tasks](#tasks) that are not specified in the dict
+
   <br />
+
   advance the progress bar by a percentage with `bar.adv()`, args defined below
+
   <br />
 
   - to: a percentage; the bar will go forward that amount
@@ -28,12 +35,19 @@ more time went into the name than the project (it's probarly not good...)
   - show\_newline: show a newline after bar reaches 100% (not on official pip release yet) (default `True`)
 
   <br />
+
   make the bar stop, with animations still going (use `time.sleep` if you do not want animations) `bar.wait()`, args defined below
+
   <br />
+  
   - time_: time to wait
+
   <br />
+
   reset the progress bar with `bar.reset()`, args defined below
+
   <br />
+
    - show_: show the current state of bar after resetting (default False)
 
   ## tasks
