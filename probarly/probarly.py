@@ -1,10 +1,21 @@
 #!/bin/env python3
 """Create beautiful, heavily customizable progress bars... probarly"""
-import time
-from typing import Any, Dict, List, TypeVar
+import time, os
+from typing import Any, Dict, List, TypeVar, Union
+
+os.system("")  # enable color support
 
 AnimationType = TypeVar("AnimationType")
 TaskType = TypeVar("TaskType")
+
+COLOURS = {
+    "RED": "\033[0m\033[0;31m",
+    "YELLOW": "\033[0m\033[0;33m",
+    "GREEN": "\033[0m\033[0;32m",
+    "BLUE": "\033[0m\033[0;34m",
+    "CYAN": "\033[0m\033[0;36m",
+    "PURPLE": "\033[0m\033[0;35m",
+}
 
 
 class Task:
@@ -47,10 +58,10 @@ class OtherAnimations:
     """Contains animations for after the progress bar itself."""
 
     up_down = ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"]
-    up_down = Animation(up_down + up_down[::-1])
     spinner_clockwise = Animation(["/", "-", "\\", "|"], 10)
     spinner_counterclockwise = Animation(spinner_clockwise.frames[::-1], 10)
-    morph = Animation(BarAnimations.classic_fill + up_down.frames[::-1])
+    morph = Animation(BarAnimations.classic_fill + up_down[::-1])
+    up_down = Animation(up_down + up_down[::-1])
 
 
 class Progbar:
@@ -63,7 +74,10 @@ class Progbar:
         start: str = "|",
         end: str = "|",
         frames: List[str] = BarAnimations.classic_fill,
-        animations: Dict[int, AnimationType] = {"*": OtherAnimations.up_down},
+        animations: Dict[Union[int, str], AnimationType] = {
+            "*": OtherAnimations.up_down
+        },
+        colours: Dict[Union[int, str], str] = {"*": ""},
     ):
         """
         How to use:
@@ -76,13 +90,19 @@ class Progbar:
              - you can use any task id to specify the animation to use when that task is active
              - an id of -1 is reserved for tasks with no text
              - you can use a '*' to denote all tasks that are not specified in the dict
+          - colours:
+             - you can use any task id to specify the colour to use when that task is active
+             - an id of -1 is reserved for tasks with no text
+             - you can use a '*' to denote all tasks that are not specified in the dict
         """
         self.__animation = Animation([""])
         self.__animation_frame = 0
+        self.__colour = ""
         self.__frame_index = 0
         self.__full = 0
         self.animations = animations
         self.bar = [frames[0]]
+        self.colours = colours
         self.end = end
         self.filler = filler
         self.frames = frames
@@ -93,7 +113,7 @@ class Progbar:
     def show(self) -> None:
         """Show the current state of the bar."""
         print(
-            f"\x1b[1K\r{self.task.text}{self.start}{''.join(self.bar)}{self.filler * (self.length - self.__full - 1)}{self.end} {int(round((self.__full/self.length) * 100))}% {self.__animation.frames[self.__animation_frame]}",
+            f"\x1b[1K\r{self.task.text}{self.start}{self.__colour}{''.join(self.bar)}{self.filler * (self.length - self.__full - 1)}\033[0m{self.end} {int(round((self.__full/self.length) * 100))}% {self.__animation.frames[self.__animation_frame]}",
             end="",
         )
 
@@ -114,15 +134,22 @@ class Progbar:
           - show: actually show the bar (default True)
         """
         self.task = task
+        if task.id_ in self.colours:
+            self.__colour = self.colours[task.id_]
+        elif "*" in self.colours:
+            self.__colour = self.colours["*"]
+        else:
+            self.__colour = ""
         for _ in range(int(round((to / 100) * self.length)) * len(self.frames)):
             self.wait(time_)
             if self.bar[-1] in self.frames[:-1]:
                 self.bar[-1] = self.frames[self.frames.index(self.bar[-1]) + 1]
             elif self.bar[-1] == self.frames[-1]:
-                if self.length - self.__full - 1:
+                if (self.length - self.__full - 1) > 0:
                     self.bar.append(self.frames[0])
                 else:
-                    self.__full += 1
+                    if self.length == self.__full + 1:
+                        self.__full += 1
                     self.show()
                     if show_newline:
                         print()

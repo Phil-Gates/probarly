@@ -1,5 +1,5 @@
 # probarly
-more time went into the name than the project (it's probarly not good...) [WARNING: DO NOT REPEAT FRAMES IN BAR ANIMATIONS]
+more time went into the name than the project (it's probarly not good...)
 
 # how 2
   ## the bar itself
@@ -12,6 +12,10 @@ more time went into the name than the project (it's probarly not good...) [WARNI
   - frames: frames for the animation of the progress bar (default `BarAnimations.classic_fill`)
   - animations: how to use:
       - you can use any task [id](#tasks) to specify the animation to use when that task is active
+      - an [id](#tasks) of -1 is reserved for [tasks](#tasks) with no text
+      - you can use a '*' to denote all [tasks](#tasks) that are not specified in the dict
+  - colours: how to use:
+      - you can use any task [id](#tasks) to specify the colour to use when that task is active
       - an [id](#tasks) of -1 is reserved for [tasks](#tasks) with no text
       - you can use a '*' to denote all [tasks](#tasks) that are not specified in the dict
   <br />
@@ -34,9 +38,9 @@ more time went into the name than the project (it's probarly not good...) [WARNI
   you can define a new task with `probarly.Task()` you give it text to display and an id, which is an int used for more efficient task managing, typehint with TaskType an example is below.
   ```python
 >>> import probarly
->>> bar = probarly.Progbar(length=100, animations={0: probarly.OtherAnimations.morph, "*": probarly.OtherAnimations.up_down})
->>> bar.adv(to=50, task=probarly.Task("Part one... ", 0))  # displays the `morph` animation
->>> bar.adv(to=50, task=probarly.Task("Part two... ", 99)) # displays the `up_down` animation
+>>> bar = probarly.Progbar(length=100, animations={0: probarly.OtherAnimations.morph, "*": probarly.OtherAnimations.up_down}, colours={0: probarly.COLOURS["RED"], "*", probarly.COLOURS["CYAN"]})
+>>> bar.adv(to=50, task=probarly.Task("Part one... ", 0))  # displays the `morph` animation with a red bar
+>>> bar.adv(to=50, task=probarly.Task("Part two... ", 99)) # displays the `up_down` animation with a cyan bar
   ```
 
   ## animations
@@ -45,6 +49,8 @@ more time went into the name than the project (it's probarly not good...) [WARNI
 # disclaimers
   - it's bleeding edge, so 60% of the time i just pushed it not even testing =)
   - also, it's a pun on probably, not properly
+  - for some reason, colours make the progress bar very choppy
+  - do not repeat frames
 
 # installation
 ```
